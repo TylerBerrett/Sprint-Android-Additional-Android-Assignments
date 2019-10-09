@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".LightConfiguration">
 
+    <TextView
+        android:gravity="center"
+        android:id="@+id/display_name"
+        android:textColor="@android:color/black"
+        android:textSize="64sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
