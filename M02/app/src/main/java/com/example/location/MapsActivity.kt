@@ -77,6 +77,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(MarkerOptions().position(mMap.cameraPosition.target).title("My marker"))
         }
 
+        mMap.setOnMarkerClickListener {
+            Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
+            return@setOnMarkerClickListener true
+        }
+
         // Add a marker in Sydney and move the camera
         /*val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
