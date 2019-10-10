@@ -1,10 +1,9 @@
 package com.example.menus
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_light_configuration.*
 
-class LightConfiguration : AppCompatActivity() {
+class LightConfiguration : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

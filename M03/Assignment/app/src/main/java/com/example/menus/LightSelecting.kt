@@ -1,10 +1,9 @@
 package com.example.menus
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_light_selecting.*
 
-class LightSelecting : AppCompatActivity() {
+class LightSelecting : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -13,5 +12,8 @@ class LightSelecting : AppCompatActivity() {
         title = "Light Selecting"
 
         display_name.text = "Light Selecting"
+
+
+
     }
 }

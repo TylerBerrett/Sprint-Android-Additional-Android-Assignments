@@ -1,32 +1,50 @@
 package com.example.menus
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.drawer_layout.*
 
-class MainActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
+
+    protected var toolbar: Toolbar? = null
+    protected  var drawerLayout: DrawerLayout? = null
+    protected var frameLayout: FrameLayout? = null
+    protected var context: Context? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.drawer_layout)
+        context = this
+    }
 
-        val toolbar = toolbar
+
+    override fun setContentView(layoutResID: Int) {
+        val layout = layoutInflater.inflate(R.layout.drawer_layout, null)
+        drawerLayout = layout.findViewById(R.id.drawer_layout)
+        frameLayout = drawerLayout?.findViewById(R.id.frame_layout)
+        layoutInflater.inflate(layoutResID, frameLayout, true)
+
+        toolbar = drawerLayout?.findViewById(R.id.toolbar)
+
         setSupportActionBar(toolbar)
 
-        val drawerLayout = drawer_layout
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer)
-        drawerLayout.addDrawerListener(toggle)
+        drawerLayout?.addDrawerListener(toggle)
         toggle.syncState()
 
-        val navView = nav_view
-        navView.setNavigationItemSelectedListener {
+        val navView = drawerLayout?.findViewById<NavigationView>(R.id.nav_view)
+        navView?.setNavigationItemSelectedListener {
             it.isChecked = true
             when(it.itemId){
                 R.id.controller -> startActivity(Intent(this, ControllerConfiguration::class.java))
@@ -35,9 +53,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.dark_mode -> Toast.makeText(this, "dark mode activated", Toast.LENGTH_SHORT).show()
 
             }
-            drawerLayout.closeDrawers()
+            drawerLayout?.closeDrawers()
             true
         }
+
+        super.setContentView(layout)
 
     }
 
